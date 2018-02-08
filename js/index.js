@@ -28,37 +28,33 @@ $(document).ready(function () {
 
 		console.log("");
 	});
+	$('#click-back').click(function () {
+
+		window.history.back();
+	});
 
 });
 
-function getHeroes() {
+function displayHeroes() {
 	var test;
 	var heroData = JSON.parse(httpGet("https://api.opendota.com/api/heroes"));
-	URLS = [];
+	var URLS = [];
 	for (k in heroData) {
 		var heroFormatText = heroData[k].name.replace("npc_dota_hero_" , "");
 
 		URLS.push("http://cdn.dota2.com/apps/dota2/images/heroes/" + heroFormatText.toLowerCase() + "_lg.png");
 		test += heroFormatText;
 	}
-
-	return test;
-
-
-
-
-
-
-}
-function displayHeroes() {
-
 	for (k in URLS) {
 		
 		img = new Image();   // Create new img element
+		img.className = "img";
 		img.src = URLS[k];
 		var link = URLS[k].replace("http://cdn.dota2.com/apps/dota2/images/heroes/" ,"");
 		link = link.replace("_lg.png", "");
-		document.body.appendChild(img);
+		
+		
+		document.getElementById("hero-grid").appendChild(img);
 		
 	
 		
@@ -66,10 +62,9 @@ function displayHeroes() {
 		
 		 // Set source path
 	}
-	
-	return URLS[0];
-
+	return test;
 }
+
 function makeHandler(j) {
 	return function() {
 	  console.log(j);
